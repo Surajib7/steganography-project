@@ -30,3 +30,18 @@ The project uses the LSB method to modify the least significant bits of the imag
 To compile the project, use:
 ```bash
 gcc steganography.c -o steganography
+
+./steganography encode input_image.bmp secret_message.txt output_image.bmp
+./steganography decode output_image.bmp extracted_message.txt
+
+Status read_and_validate_encode_args(char *argv[], EncodeInfo *encInfo);
+Status copy_bmp_header(FILE *fptr_src_image, FILE *fptr_dest_image);
+Status encode_magic_string(const char *magic_string, FILE *fptr_src_image, FILE *fptr_stego_image);
+Status encode_secret_file_extn_size(int extn_size, FILE *fptr_src_image, FILE *fptr_dest_image);
+Status encode_secret_file_size(int size, FILE *fptr_src_image, FILE *fptr_stego_image);
+Status encode_secret_file_data(FILE *fptr_src_image, FILE *fptr_stego_image, FILE *fptr_secret, int size);
+Status copy_remaining_img_data(FILE *fptr_src_image, FILE *fptr_stego_image);
+Status decode_magic_string(FILE *fptr_stego_image);
+Status decode_secret_file_size(FILE *fptr_stego_image, int *size);
+Status decode_secret_file_data(FILE *fptr_stego_image, FILE *fptr_output, int size);
+
